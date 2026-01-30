@@ -103,6 +103,7 @@ public class Project {
             System.out.println("1. Create Employee");
             System.out.println("2. Display Employees");
             System.out.println("3. Raise Salary");
+            System.out.println("4. Delete Employee");
             System.out.println("4. Exit");
             System.out.print("Enter choice: ");
             mainChoice = sc.nextInt();
@@ -146,13 +147,41 @@ public class Project {
                         System.out.println("No Employee Found");
                     } else {
                         for (Employee e : list) {
+                        	
                             e.raiseSalary();
                         }
                     }
                     break;
 
-                // -------- EXIT --------
+              
+                 // -------- DELETE EMPLOYEE --------
                 case 4:
+                    if (list.isEmpty()) {
+                        System.out.println("No Employee Found");
+                    } else {
+                        System.out.print("Enter Employee ID to delete: ");
+                        int deleteId = sc.nextInt();
+
+                        boolean found = false;
+
+                        java.util.Iterator<Employee> itr = list.iterator();
+                        while (itr.hasNext()) {
+                            Employee e = itr.next();
+                            if (e.id == deleteId) {
+                                itr.remove();   // SAFE remove
+                                found = true;
+                                System.out.println("Employee removed successfully");
+                                break;
+                            }
+                        }
+
+                        if (!found) {
+                            System.out.println("Employee ID not found");
+                        }
+                    }
+                    break;
+
+                case 5:
                     System.out.println("Thank you...!");
                     break;
 
@@ -160,6 +189,6 @@ public class Project {
                     System.out.println("Invalid Choice");
             }
 
-        } while (mainChoice != 4);
+        } while (mainChoice != 5);
     }
 }
